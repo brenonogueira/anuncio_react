@@ -6,9 +6,14 @@ import { VisualizarAnuncio } from "./pages/VisualizarAnuncio/";
 import { CadastrarAnuncio } from "./pages/CadastrarAnuncio/";
 import { EditarAnuncio } from "./pages/EditarAnuncio/";
 
+import 'bootstrap/dist/css/bootstrap.min.css';  
+
+import {Menu} from './component/Menu.js'
+
 function App() {
   return (
     <div>
+      <Menu />
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />

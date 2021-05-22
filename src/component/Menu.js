@@ -18,7 +18,7 @@ export const Menu = (props) => {
     <div>
       <Navbar color="info" light expand="md">
         <Container>
-        <NavbarBrand href="/">Anúncios</NavbarBrand>
+        <NavbarBrand href="/">SysAnuncios</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

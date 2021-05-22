@@ -3,6 +3,7 @@ import { Container, Table, Alert } from "reactstrap";
 import axios from "axios";
 //importar como objeto
 import {api} from "../../config/";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
      
@@ -29,7 +30,7 @@ export const Home = () => {
 
     useEffect(() => {
         getAnuncios();
-    }, [])
+    },[])
 
   return (
     <div>
@@ -39,30 +40,28 @@ export const Home = () => {
                     <h1>Anuncio</h1>
                 </div>
                 <div className="p-2">
-                    <a href="/cadastrar-anuncio" className="btn btn-success btn-sm text-right"> Cadastrar Anúncio</a>
+                    <Link to={"/cadastrar-anuncio"} className="btn btn-success btn-sm text-right"> Cadastrar Anúncio </Link>
                 </div>
             </div>
 
             {/*vefificação se vai exibir mensagem de erro ou nao*/}
-            {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : "" }
-            
-
+            {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : ''}
         <Table striped hover>
             <thead>
                 <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descrição</th>
-                <th className="text-center">Ações</th>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th className="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(item => (
-                    <tr key={item.id}> {/* definindo que id é a chave unica para cada registro */}
-                        <td>{item.id }</td>
+                    <tr key={item.id}> 
+                        <td>{item.id}</td>
                         <td>{item.titulo}</td>
-                        <td>{item.descricao}</td>
-                        <th className="text-center">Ações</th>
+                        <td className="text-center">
+                            <Link to={"/visualizar-anuncio/"+item.id} className="btn btn-outline-primary btn-sm">Visualizar</Link>
+                        </td>
                     </tr>
                 ))}
             </tbody>

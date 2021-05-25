@@ -32,6 +32,34 @@ export const Home = () => {
         getAnuncios();
     },[])
 
+    //apagando anuncio
+    const apagarAnuncio = async (idAnuncio) => {
+        console.log(idAnuncio)
+        const headers = { 'Content-Type': 'application/json' }
+        await axios.delete(api + "/apagar/" + idAnuncio, {headers})
+        .then((response) => {
+            if (response.data.error) {
+                setStatus({
+                    type: 'error',
+                    mensagem: response.data.message
+                })
+            } else {
+                setStatus({
+                    type: 'success',
+                    mensagem: response.data.message
+                })
+                getAnuncios(); //CHAMA PRA ATT OS ANUNCIOS
+            }
+        })
+        .catch(() => {
+            setStatus({
+                type: 'error',
+                mensagem: 'Erro: tente novamente mais tarde!'
+            })
+        })
+       
+    }
+
   return (
     <div>
       <Container>
@@ -44,8 +72,11 @@ export const Home = () => {
                 </div>
             </div>
 
-            {/*vefificação se vai exibir mensagem de erro ou nao*/}
-            {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : ''}
+            {/*vefificação se vai exibir mensagem de erro */}
+            {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : ''}  
+            {/*vefificação se vai exibir mensagem de sucesso */}  
+            {status.type === 'success' ? <Alert color="success">{status.mensagem}</Alert> : ''} 
+
         <Table striped hover>
             <thead>
                 <tr>
@@ -60,7 +91,9 @@ export const Home = () => {
                         <td>{item.id}</td>
                         <td>{item.titulo}</td>
                         <td className="text-center">
-                            <Link to={"/visualizar-anuncio/"+item.id} className="btn btn-outline-primary btn-sm">Visualizar</Link>
+                            <Link to={"/visualizar-anuncio/"+item.id} className="btn btn-outline-primary btn-sm m-1">Visualizar</Link>
+                            <Link to={"/editar-anuncio/"+item.id} className="btn btn-outline-warning btn-sm">Editar</Link>
+                            <span className="btn btn-outline-danger btn-sm m-1" onClick={() => apagarAnuncio(item.id)}>Apagar</span>
                         </td>
                     </tr>
                 ))}

@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/visualizar-anuncio/:id" component={VisualizarAnuncio} />
           <Route path="/cadastrar-anuncio" component={CadastrarAnuncio} />
-          <Route path="/editar-anuncio" component={EditarAnuncio} />
+          <Route path="/editar-anuncio/:id" component={EditarAnuncio} />
         </Switch>
       </Router>
     </div>

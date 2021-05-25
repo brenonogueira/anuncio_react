@@ -6,3 +6,5 @@ rodar projeto
 ### npm install --save bootstrap
 ### npm install --save reactstrap react react-dom
 ### npm install --save axios 
+
+### npm install --save availity-reactstrap-validation react react-dom

@@ -41,7 +41,8 @@ export const VisualizarAnuncio = (props) => { // (props) para receber id
                         <h1>Visualizar Anuncio</h1>
                     </div>
                     <div className="p-2">
-                        <Link to={"/"} className="btn btn-info btn-sm text-right">Listar</Link>
+                        <Link to={"/"} className="btn btn-info btn-sm text-right m-1">Listar</Link>
+                        <Link to={"/editar-anuncio/"+data.id} className="btn btn-outline-warning btn-sm">Editar</Link>
                     </div>
                 </div>
                 <hr className="m-1" />

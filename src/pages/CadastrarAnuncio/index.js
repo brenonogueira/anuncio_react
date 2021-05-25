@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Container, Alert, Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import { Container, Alert, Form, FormGroup, Label, Input, Button, Spinner} from 'reactstrap'
 import axios from 'axios';
 import { api } from '../../config';
 
@@ -16,21 +16,15 @@ export const CadastrarAnuncio = () => {
         titulo: '',
         descricao: ''
     })
-
+    
     //receber valores do formulário / ...anuncio indica que está pegando o valor que 'anuncio' no setState já tem
     const valorInput = (e) => setAnuncio({...anuncio, [e.target.name]: e.target.value});
 
     const cadAnuncio = async (e) => {
-
         setStatus({ formSave: true }) //indica que está salvando para a API 
-
-        e.preventDefault(); //nao recarregar a página ao clicar
-        // console.log(anuncio)
-        //recebendo conteudo 
-        const headers = {
-            'Content-Type': 'application/json' //indicando que os dados serão enviados em JSON
-        }
-        await axios.post(api+"/cadastrar", anuncio, { headers })
+        e.preventDefault(); //nao recarregar a página ao clicar 
+        const headers = { 'Content-Type': 'application/json' } //indicando que os dados serão enviados em JSON  
+        await axios.post(api+"/cadastrar", anuncio, { headers }) //setando api
         .then((response) => {
             // console.log(response)
             if(response.data.error) { //vem da api
@@ -73,7 +67,7 @@ export const CadastrarAnuncio = () => {
                 <Form onSubmit={cadAnuncio}>
                     <FormGroup>
                         <Label>Titulo</Label>
-                        <Input type="text" name="titulo" id="titulo" placeholder="Digite o título do anúncio" onChange={valorInput} /> 
+                        <Input type="text" name="titulo" id="titulo" placeholder="Digite o título do anúncio" onChange={valorInput} required  max="120" />
                         {/* sempre que houver uma alteração no campo, chame a seguinte função onChange={valorInput} */}
                     </FormGroup>
                     
@@ -83,10 +77,8 @@ export const CadastrarAnuncio = () => {
                     </FormGroup>
 
                     {/* <Button className="mt-4" type="submit" color="success">Cadastrar</Button> */}
-                    {status.formSave ? "Salvando" : <Button className="mt-4" type="submit" color="success">Cadastrar</Button> }
+                    {status.formSave ?<Button disabled className="mt-4" type="submit" outline color="success">Salvando <Spinner size="sm" children="" color="success" /></Button> : <Button className="mt-4" type="submit" color="success">Cadastrar</Button> }
                 </Form>
-
-
             </Container>
         </div>
     );

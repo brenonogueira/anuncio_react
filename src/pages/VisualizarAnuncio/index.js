@@ -15,6 +15,8 @@ export const VisualizarAnuncio = (props) => { // (props) para receber id
         mensagem: ''
     })
 
+    const [dataImg, setDataImg] = useState();
+
     useEffect(() => {
         const getAnuncio = async () => {
             await axios
@@ -22,6 +24,7 @@ export const VisualizarAnuncio = (props) => { // (props) para receber id
                 .then((response) => {
                     // console.log(response.data.anuncio);
                     setData(response.data.anuncio);
+                    setDataImg(response.data.endereco_imagem)
                 })
                 .catch(() => {
                     setStatus({
@@ -41,8 +44,9 @@ export const VisualizarAnuncio = (props) => { // (props) para receber id
                         <h1>Visualizar Anuncio</h1>
                     </div>
                     <div className="p-2">
-                        <Link to={"/"} className="btn btn-info btn-sm text-right m-1">Listar</Link>
+                        <Link to={"/"} className="btn btn-outline-info btn-sm text-right m-1">Listar</Link>
                         <Link to={"/editar-anuncio/"+data.id} className="btn btn-outline-warning btn-sm">Editar</Link>
+                        <Link to={"/editar-anuncio-img/"+data.id} className="btn btn-outline-primary btn-sm m-1">Editar Imagem</Link>
                     </div>
                 </div>
                 <hr className="m-1" />
@@ -51,6 +55,9 @@ export const VisualizarAnuncio = (props) => { // (props) para receber id
                 {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : ''}    
 
                 <dl className="row">
+                    <dt className="col-sm-3">Imagem</dt>
+                    <dd className="col-sm-9">{<img src={dataImg} alt="Anuncio imagem" width="150" height="150" />}</dd>
+
                     <dt className="col-sm-3">ID</dt>
                     <dd className="col-sm-9">{data.id}</dd>
 

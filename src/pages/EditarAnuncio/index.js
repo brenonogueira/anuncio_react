@@ -84,8 +84,8 @@ export const EditarAnuncio = (props) => {
 
                  {/*vefificação se vai exibir mensagem de erro */}
                  {status.type === 'error' ? <Alert color="danger">{status.mensagem}</Alert> : ''}  
-                {/*vefificação se vai exibir mensagem de sucesso */}  
-                {status.type === 'success' ? <Alert color="success">{status.mensagem}</Alert> : ''} 
+                 {/*vefificação se vai exibir mensagem de sucesso */}  
+                 {status.type === 'success' ? <Alert color="success">{status.mensagem}</Alert> : ''} 
 
                 <Form onSubmit={editAnuncio}>
                     <FormGroup>

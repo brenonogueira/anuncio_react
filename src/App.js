@@ -5,6 +5,7 @@ import { Home } from "./pages/Home/";
 import { VisualizarAnuncio } from "./pages/VisualizarAnuncio/";
 import { CadastrarAnuncio } from "./pages/CadastrarAnuncio/";
 import { EditarAnuncio } from "./pages/EditarAnuncio/";
+import { EditarAnuncioImg } from "./pages/EditarAnuncioImg";
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/visualizar-anuncio/:id" component={VisualizarAnuncio} />
           <Route path="/cadastrar-anuncio" component={CadastrarAnuncio} />
           <Route path="/editar-anuncio/:id" component={EditarAnuncio} />
+          <Route path="/editar-anuncio-img/:id" component={EditarAnuncioImg} />
         </Switch>
       </Router>
     </div>
